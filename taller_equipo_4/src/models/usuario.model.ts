@@ -1,8 +1,14 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
-import {Sede} from './sede.model';
-import {Vehiculo} from './vehiculo.model';
+import {
+  belongsTo,
+  Entity,
+  hasMany,
+  model,
+  property,
+} from '@loopback/repository';
 import {Cita} from './cita.model';
 import {Revision} from './revision.model';
+import {Sede} from './sede.model';
+import {Vehiculo} from './vehiculo.model';
 
 @model({settings: {strict: false}})
 export class Usuario extends Entity {
@@ -21,13 +27,13 @@ export class Usuario extends Entity {
 
   @property({
     type: 'string',
-    default: "Falta diligenciar el telefono",
+    default: 'Falta diligenciar el telefono',
   })
   telefono?: string;
 
   @property({
     type: 'date',
-    default: "Falta ingresar una fecha",
+    default: 'Falta ingresar una fecha',
   })
   fechaNacimiento?: string;
 

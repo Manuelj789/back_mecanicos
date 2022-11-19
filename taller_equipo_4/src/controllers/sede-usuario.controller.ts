@@ -15,20 +15,17 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
-import {
-  Sede,
-  Usuario,
-} from '../models';
+import {Sede, Usuario} from '../models';
 import {SedeRepository} from '../repositories';
 
 export class SedeUsuarioController {
   constructor(
     @repository(SedeRepository) protected sedeRepository: SedeRepository,
-  ) { }
+  ) {}
 
   @get('/sedes/{id}/usuarios', {
     responses: {
-      '200': {
+      200: {
         description: 'Array of Sede has many Usuario',
         content: {
           'application/json': {
@@ -61,11 +58,12 @@ export class SedeUsuarioController {
           schema: getModelSchemaRef(Usuario, {
             title: 'NewUsuarioInSede',
             exclude: ['idUsuario'],
-            optional: ['sedeId']
+            optional: ['sedeId'],
           }),
         },
       },
-    }) usuario: Omit<Usuario, 'idUsuario'>,
+    })
+    usuario: Omit<Usuario, 'idUsuario'>,
   ): Promise<Usuario> {
     return this.sedeRepository.usuario(id).create(usuario);
   }
@@ -88,7 +86,8 @@ export class SedeUsuarioController {
       },
     })
     usuario: Partial<Usuario>,
-    @param.query.object('where', getWhereSchemaFor(Usuario)) where?: Where<Usuario>,
+    @param.query.object('where', getWhereSchemaFor(Usuario))
+    where?: Where<Usuario>,
   ): Promise<Count> {
     return this.sedeRepository.usuario(id).patch(usuario, where);
   }
@@ -103,7 +102,8 @@ export class SedeUsuarioController {
   })
   async delete(
     @param.path.string('id') id: string,
-    @param.query.object('where', getWhereSchemaFor(Usuario)) where?: Where<Usuario>,
+    @param.query.object('where', getWhereSchemaFor(Usuario))
+    where?: Where<Usuario>,
   ): Promise<Count> {
     return this.sedeRepository.usuario(id).delete(where);
   }

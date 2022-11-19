@@ -7,13 +7,13 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -23,7 +23,7 @@ import {VehiculoRepository} from '../repositories';
 export class VehiculosController {
   constructor(
     @repository(VehiculoRepository)
-    public vehiculoRepository : VehiculoRepository,
+    public vehiculoRepository: VehiculoRepository,
   ) {}
 
   @post('/vehiculos')
@@ -37,7 +37,6 @@ export class VehiculosController {
         'application/json': {
           schema: getModelSchemaRef(Vehiculo, {
             title: 'NewVehiculo',
-            
           }),
         },
       },
@@ -52,9 +51,7 @@ export class VehiculosController {
     description: 'Vehiculo model count',
     content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Vehiculo) where?: Where<Vehiculo>,
-  ): Promise<Count> {
+  async count(@param.where(Vehiculo) where?: Where<Vehiculo>): Promise<Count> {
     return this.vehiculoRepository.count(where);
   }
 
@@ -106,12 +103,11 @@ export class VehiculosController {
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Vehiculo, {exclude: 'where'}) filter?: FilterExcludingWhere<Vehiculo>
+    @param.filter(Vehiculo, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Vehiculo>,
   ): Promise<Vehiculo> {
     return this.vehiculoRepository.findById(id, filter);
   }
-
-
 
   // @get('/vehiculos/placa')
   // @response(200, {
@@ -128,9 +124,6 @@ export class VehiculosController {
   // ): Promise<Vehiculo> {
   //   return this.vehiculoRepository.findOne(filter ? : placa);
   // }
-
-
-
 
   @patch('/vehiculos/{id}')
   @response(204, {

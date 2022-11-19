@@ -1,4 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Usuario} from './usuario.model';
 
 @model({settings: {strict: false}})
@@ -16,8 +16,6 @@ export class Sede extends Entity {
   })
   usuario: string;
 
-  
-
   @property({
     type: 'string',
     required: true,
@@ -32,7 +30,7 @@ export class Sede extends Entity {
 
   @property({
     type: 'string',
-    default: "Falta una descripcion",
+    default: 'Falta una descripcion',
   })
   descripcion?: string;
 
